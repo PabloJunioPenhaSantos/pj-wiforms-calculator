@@ -9,7 +9,8 @@ namespace Exemplo.Classes
     internal class Operacoes
     {
         double x, y;
-        public Operacoes() {
+        public Operacoes()
+        {
             x = 0; y = 0;
         }
 
@@ -19,69 +20,100 @@ namespace Exemplo.Classes
         {
             this.x = x;
         }
-        
+
         public double getX()
         {
             return this.x;
         }
-
+        public double getY()
+        {
+            return this.y;
+        }
         public void setYFromInput(double y)
         {
             this.y = y;
         }
 
-        public double getY()
-        {
-            return this.y;
-        }
-
-        //Operações
-
         public double soma()
         {
             return this.x + this.y;
         }
-
-        public double subtract()
+        public double subtracao()
         {
             return this.x - this.y;
+
         }
 
-        public double multiply()
+        public double multiplicacao()
         {
             return this.x * this.y;
         }
 
-        public double devide()
+        public double divisao()
         {
-            if (this.y == 0)
-            {
-                return 0;
-            } else
-            {
-                return this.x / this.y;
-            }
+            return this.x / this.y;
         }
 
-        public double squareOfX()
+        public double valorQuadrado()
         {
-            return (this.x * this.x);
+            return this.x * this.x;
         }
 
-        public double squareRootOfX()
+        public double raizQuadrada()
         {
-            if(this.x == 0)
+            return this.x / this.x;
+        }
+
+        public double porcentagem()
+        {
+            return (this.x / 100) * this.y;
+        }
+
+        public double binario()
+        {
+            long value = (long)this.x;
+
+            if (value <= 0)
             {
-                return 0;
-            } else if(this.x % 2 == 0){
-                return this.x / 2;
+                return 0000;
             }
             else
             {
-                return 0;
+                String restos = "";
+                while (value > 0)
+                {
+                    restos += value % 2;
+                    value = value / 2;
+                }
+                String resultadoBinario = "";
+                for (int i = restos.Length - 1; i >= 0; i--)
+                {
+                    resultadoBinario += restos[i];
+                }
+                return long.Parse(resultadoBinario);
             }
+
         }
 
-        
+        public double raizY()
+        {
+            int count = 0;
+            double result = this.x;
+
+            while (count < (this.y - 1))
+            {
+                result *= this.x;
+                count++;
+            }
+            return result;
+        }
+
+        public string apagar()
+        {
+            return "";
+
+        }
+
+
     }
 }
