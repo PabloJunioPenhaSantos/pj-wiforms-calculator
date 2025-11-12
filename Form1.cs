@@ -1,183 +1,177 @@
 ﻿using Exemplo.Classes;
-using System.Configuration;
-using System.Runtime.Intrinsics.Arm;
 
 namespace Exemplo
 {
     public partial class Form1 : Form
     {
         Operacoes op;
+
         public Form1()
         {
             InitializeComponent();
             op = new Operacoes();
-
         }
-
 
         public void setInputs()
         {
             op.setXFromInput(double.Parse(inputTextX.Text));
-            if (String.IsNullOrWhiteSpace(inputTextY.Text))
-            {
-                op.setYFromInput(0);
-            }
-            else
-            {
-                op.setYFromInput(double.Parse(inputTextY.Text));
-            }
-
-
-
+            op.setYFromInput(double.Parse(inputTextY.Text));
         }
 
-        public void printResult1(double x, double y, string operacao, double result)
+        public void setInputX()
         {
-            string formatoSaida = " " + x + operacao + " = ";
-            labelOutput.Visible = true;
-            labelOutput.Text = formatoSaida;
-
-            string resultado = "" + result + "";
-            labelOutput2.Visible = true;
-            labelOutput2.Text = resultado;
+            op.setXFromInput(double.Parse(inputTextX.Text));
         }
 
-        public void printResult2(double x, double y, string operacao, double result)
-        {
-            string formatoSaida = " " + x + operacao + " = ";
-            labelOutput.Visible = true;
-            labelOutput.Text = formatoSaida;
-
-            string resultado = "" + result + "";
-            labelOutput2.Visible = true;
-            labelOutput2.Text = resultado;
-
-        }
-
-        public void printResult3(double x, double y, string operacao, double result)
-        {
-            string formatoSaida = " " + operacao + x + " = ";
-            labelOutput.Visible = true;
-            labelOutput.Text = formatoSaida;
-
-            string resultado = "" + result + "";
-            labelOutput2.Visible = true;
-            labelOutput2.Text = resultado;
-
-        }
-        public void printResult6(string operacao)
-        {
-            string formatoSaida = " ";
-            labelOutput.Visible = true;
-            labelOutput.Text = formatoSaida;
-
-            string resultado = "";
-            labelOutput2.Visible = true;
-            labelOutput2.Text = resultado;
-
-            string vazio = " ";
-            inputTextX.Visible = true;
-            inputTextX.Text = vazio;
-
-
-            inputTextY.Visible = true;
-            inputTextY.Text = vazio;
-
-
-        }
         public void printResult(double x, double y, string operacao, double result)
         {
-            string formatoSaida = "" + x + operacao + y + " = ";
+            string formatosaida = x + " " + operacao + " " + y + " = ";
+
             labelOutput.Visible = true;
-            labelOutput.Text = formatoSaida;
+            labelOutput.Text = formatosaida;
+            labelResult.Visible = true;
+            labelResult.Text = result.ToString();
 
-            string resultado = "" + result + "";
-            labelOutput2.Visible = true;
-            labelOutput2.Text = resultado;
+
         }
 
-        public void printResult4(double x, double y, string operacao, double result)
+
+
+        private void btnSoma_Click(object sender, EventArgs e)
         {
-            string formatoSaida = "" + y + operacao + x + " = ";
+            setInputs();
+            printResult(op.getX(), op.getX(), "+", op.soma());
+
+        }
+
+        private void btnSubtracao_Click(object sender, EventArgs e)
+        {
+            setInputs();
+            printResult(op.getX(), op.getY(), "-", op.sub());
+        }
+
+        private void btnMultiplicacao_Click(object sender, EventArgs e)
+        {
+            setInputs();
+            printResult(op.getX(), op.getY(), "x", op.mult());
+        }
+
+        private void btnDivisao_Click(object sender, EventArgs e)
+        {
+            setInputs();
+            printResult(op.getX(), op.getY(), "/", op.div());
+        }
+
+        public void printxaoq(double x, double result)
+        {
+            string formatosaida = x + "² = ";
+
+
             labelOutput.Visible = true;
-            labelOutput.Text = formatoSaida;
+            labelOutput.Text = formatosaida;
+            labelResult.Visible = true;
+            labelResult.Text = result.ToString();
 
-            string resultado = "" + result + "";
-            labelOutput2.Visible = true;
-            labelOutput2.Text = resultado;
         }
-        public void onBtnSoma_Click(object sender, EventArgs e)
+        private void btnAoQ_Click(object sender, EventArgs e)
+        {
+            setInputX();
+            printxaoq(op.getX(), op.xaoq());
+
+        }
+
+        public void printraiz(double x, double result)
+        {
+            string formatosaida = "√" + x + " = ";
+            labelOutput.Visible = true;
+            labelOutput.Text = formatosaida;
+            labelResult.Visible = true;
+            labelResult.Text = result.ToString();
+        }
+
+        private void btnRaiz_Click(object sender, EventArgs e)
+        {
+            setInputX();
+            printraiz(op.getX(), op.raizx());
+
+        }
+
+        public void printPorcentagem(double x, double y, double result)
+        {
+            string formatosaida = x + "% de " + y + " = ";
+
+            labelOutput.Visible = true;
+            labelOutput.Text = formatosaida;
+            labelResult.Visible = true;
+            labelResult.Text = result.ToString();
+        }
+        private void btnPorcentagem_Click(object sender, EventArgs e)
         {
             setInputs();
-            double result = op.soma();
-            printResult(op.getX(), op.getY(), " + ", result);
+            printPorcentagem(op.getX(), op.getY(), op.porcentagem());
+
         }
 
-        public void onBtnSubtracao_Click(object sender, EventArgs e)
+        public void printXelevy(double x, double y, double result)
+        {
+            string formatosaida = x + "^" + y + "=";
+
+            labelOutput.Visible = true;
+            labelOutput.Text = formatosaida;
+            labelResult.Visible = true;
+            labelResult.Text = result.ToString();
+        }
+        private void btnXelevy_Click(object sender, EventArgs e)
         {
             setInputs();
-            double result = op.subtracao();
-            printResult(op.getX(), op.getY(), " - ", result);
+            printXelevy(op.getX(), op.getY(), op.xelevy());
         }
 
-        public void onBtnMultiplicacao_Click(object sender, EventArgs e)
+        public void printResultBin(double x, string operacao, string result)
         {
-            setInputs();
-            double result = op.multiplicacao();
-            printResult(op.getX(), op.getY(), " x ", result);
+            result = op.binario(x);
+            string format = x + operacao + " = ";
+            labelOutput.Visible = true;
+            labelOutput.Text = format;
+            labelResult.Visible = true;
+            labelResult.Text = result;
+
         }
 
-        public void onBtnDivisao_Click(object sender, EventArgs e)
+        private void btnBinario_Click(object sender, EventArgs e)
         {
-            setInputs();
-            double result = op.divisao();
-            printResult(op.getX(), op.getY(), " / ", result);
+            setInputX();
+            printResultBin(op.getX(), " em binário", op.binario(op.getX()));
         }
 
-        public void onBtnvalorQuadrado_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            setInputs();
-            double result = op.valorQuadrado();
-            printResult1(op.getX(), op.getX(), "^�", result);
+
         }
 
-        public void onBtnraizQuadrada_Click(object sender, EventArgs e)
+        private void labelOutput_Click(object sender, EventArgs e)
         {
-            setInputs();
-            double result = op.raizQuadrada();
-            printResult3(op.getX(), op.getX(), " Raiz quadrada de ", result);
+
         }
 
-        public void onBtnPorcentagem_Click(object sender, EventArgs e)
+        private void labelResult_Click(object sender, EventArgs e)
         {
-            setInputs();
-            double result = op.porcentagem();
-            printResult4(op.getX(), op.getY(), "% de ", result);
+
         }
 
-        public void onBtnBinario_Click(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
-            setInputs();
-            double result = op.binario();
-            printResult1(op.getX(), op.getY(), " em binario � ", result);
+
         }
 
-        public void onBtnRaizY_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            setInputs();
-            double result = op.raizY();
-            printResult(op.getX(), op.getY(), " elevado � ", result);
+            inputTextX.Text = "";
+            inputTextY.Text = "";
+
+            labelOutput.Text = "0";
+            labelResult.Text = "0";
+            
         }
-
-        public void onBtnApagar_Click(object sender, EventArgs e)
-        {
-            setInputs();
-            string result = op.apagar();
-            printResult6(" ");
-
-        }
-
-        
     }
-
 }
